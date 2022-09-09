@@ -33,18 +33,21 @@ public class BranchService implements IBranchService{
     public List<BranchDTO> getBranchesThatShowTheMovie(Integer movieId) {
 		LocalDate date=LocalDate.now();
 		LocalTime time=LocalTime.now();
-		return branchRepository.getBranchThatShowTheMovie(movieId).stream()
-				.map(branch -> {
-					BranchDTO branchDTO=modelMapper.map(branch, BranchDTO.class);
-					branchDTO.setSchedules(new LinkedList<ScheduleDTO>());
-					for(Schedule schedule: branch.getScheduleList()) {
-			               if(schedule.getStartDate().compareTo(date)>0 ||
-			    				(schedule.getStartDate().compareTo(date)==0 && schedule.getStartTime().compareTo(time)>0)	) {
-			                		branchDTO.getSchedules().add(modelMapper.map(schedule,ScheduleDTO.class));
-			                }
-			        }
-					return branchDTO;
-				}).collect(Collectors.toList());
+		List<BranchDTO> branchDTOs=new ArrayList<BranchDTO>();
+		for(Branch branch: branchRepository.getBranchThatShowTheMovie(movieId)) {
+			BranchDTO branchDTO=modelMapper.map(branch, BranchDTO.class);
+			branchDTO.setSchedules(new LinkedList<ScheduleDTO>());
+			for(Schedule schedule: branch.getScheduleList()) {
+	               if(schedule.getStartDate().compareTo(date)>0 ||
+	    				(schedule.getStartDate().compareTo(date)==0 && schedule.getStartTime().compareTo(time)>0)	) {
+	                		branchDTO.getSchedules().add(modelMapper.map(schedule,ScheduleDTO.class));
+	                }
+	        }
+			if(branchDTO.getSchedules().size()>0) {
+				branchDTOs.add(branchDTO);
+			}
+		}
+		return branchDTOs;
     }
 
 	@Override

@@ -26,7 +26,5 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("Update User u set u.password=:password WHERE u.id = (:id)")
     void changePassword(@Param("id") Integer id,@Param("password") String password);
-    @Modifying
-    @Query(nativeQuery = true,value= "DELETE FROM users_roles t WHERE t.user_id = (:id)")
-    void deleteUserTableJoin(@Param("id") Integer id);
+
 }

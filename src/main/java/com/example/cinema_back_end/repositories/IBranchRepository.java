@@ -10,8 +10,7 @@ import java.util.List;
 
 public interface IBranchRepository extends JpaRepository<Branch, Integer> {
     @Query("SELECT b FROM Branch b where b.id in " +
-            "(SELECT s.branch.id FROM Schedule s JOIN s.movie m WHERE s.movie.id = :movieId "
-            + "AND (s.startDate>curdate() OR (s.startDate=curdate() AND s.startTime>curtime())))")
+            "(SELECT s.branch.id FROM Schedule s JOIN s.movie m WHERE s.movie.id = :movieId) ")
     List<Branch> getBranchThatShowTheMovie(@Param("movieId") Integer movieId);
     @Query("SELECT b FROM Branch b JOIN FETCH b.scheduleList WHERE b.id = (:id)")
     Branch findByIdAndFetchSchedulesEagerly(@Param("id") Integer id);

@@ -161,7 +161,10 @@ public class CinemaBackEndApplication {
 //            Set<Role> roles = new HashSet<>();
 //            Role roleAdmin = new Role();
 //            roleAdmin.setName("ROLE_ADMIN");
+//            Role roleClient = new Role();
+//            roleClient.setName("ROLE_CLIENT");
 //            roles.add(roleAdmin);
+//            roles.add(roleClient);
 //            admin.setFullName("Admin");
 //            admin.setUsername("admin@gmail.com");
 //            admin.setPassword("123456");

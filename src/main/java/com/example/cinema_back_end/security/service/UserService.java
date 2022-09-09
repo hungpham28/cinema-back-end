@@ -57,7 +57,6 @@ public class UserService implements IUserService {
     }
     @Override
     public void remove(Integer id) {
-    	userRepository.deleteUserTableJoin(id);
         userRepository.deleteById(id);
     }
 
