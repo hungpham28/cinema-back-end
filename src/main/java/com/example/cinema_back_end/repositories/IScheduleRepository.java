@@ -13,6 +13,6 @@ public interface IScheduleRepository extends JpaRepository<Schedule, Integer> {
 	List<Schedule> findSchedulesByBranch_Id(Integer branchId);
     List<Schedule> findSchedulesByBranch_IdAndRoom_Id( Integer branchId,Integer movieId);
     List<Schedule> findSchedulesByBranch_IdAndRoom_IdAndMovie_Id(Integer branchId,Integer roomId,Integer movieId);
-    @Query("SELECT DISTINCT s.startDate FROM Schedule s")
+    @Query("SELECT DISTINCT s.startDate FROM Schedule s ORDER BY s.startDate ASC")
     List<LocalDate> getAllStartDateSchedule();
 }
